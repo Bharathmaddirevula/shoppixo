@@ -1,0 +1,27 @@
+.dropdown-content {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: white;
+  min-width: 180px;
+  border-radius: 10px;
+  padding: 10px 0;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 999;
+}
+
+.dropdown-content p {
+  padding: 10px 15px;
+  margin: 0;
+  font-size: 15px;
+  cursor: pointer;
+  color: #333;
+}
+
+.dropdown-content p:hover {
+  background-color: #f2f2f2;
+}
+
+
+
+
