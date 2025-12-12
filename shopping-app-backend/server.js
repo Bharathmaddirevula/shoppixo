@@ -3,16 +3,21 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const cartRoutes = require("./routes/cartRoutes");
 const app = express();
+const orderRoutes = require("./routes/orders");
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use("/cart", cartRoutes);
+app.use("/api/orders", orderRoutes);
+
 
 // Routes
 app.use("/auth", require("./routes/authRoutes"));
 app.use("/products", require("./routes/products"));
 app.use("/cart", require("./routes/cartRoutes"));
+app.use("/api/orders", require("./routes/orders"));
+
 
 
 // MongoDB connection
