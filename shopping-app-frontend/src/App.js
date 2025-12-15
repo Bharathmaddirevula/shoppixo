@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
-
 import ProductList from "./components/ProductList";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
@@ -8,15 +7,12 @@ import Signup from "./components/Signup";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import OffersPage from "./components/OffersPage";
-
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import CheckoutPage from "./pages/CheckoutPage";
 import PaymentPage from "./pages/PaymentPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
-
 import { jwtDecode } from "jwt-decode";
-
 function App() {
   const [cart, setCart] = useState([]);
   const [search, setSearch] = useState("");
@@ -25,7 +21,6 @@ function App() {
   const [sort, setSort] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [hoverBanner, setHoverBanner] = useState(false);
-
   // TOKEN
   const token = localStorage.getItem("token");
   let user = null;
@@ -36,26 +31,20 @@ function App() {
       console.log("Invalid token");
     }
   }
-
   // FETCH CART
   const fetchCart = async () => {
     if (!token) return;
-
     const decoded = jwtDecode(token);
     const userId = decoded.userId;
-
     const res = await fetch(`http://localhost:5000/cart/${userId}`);
     const data = await res.json();
     setCart(data.items || []);
   };
-
   // CART FUNCTIONS
   const addToCart = async (product) => {
     if (!token) return alert("Please login first");
-
     const decoded = jwtDecode(token);
     const userId = decoded.userId;
-
     await fetch("http://localhost:5000/cart/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -69,23 +58,18 @@ function App() {
         },
       }),
     });
-
     fetchCart();
   };
-
   const removefromCart = async (productId) => {
     const decoded = jwtDecode(token);
     const userId = decoded.userId;
-
     await fetch("http://localhost:5000/cart/remove", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId, productId }),
     });
-
     fetchCart();
   };
-
   const increaseQty = async (productId) => {
     const decoded = jwtDecode(token);
     const userId = decoded.userId;
